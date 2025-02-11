@@ -1,0 +1,28 @@
+package com.summerizer.videoSummerizer.Service;
+
+import org.springframework.ai.image.ImagePrompt;
+import org.springframework.ai.image.ImageResponse;
+import org.springframework.ai.openai.OpenAiImageModel;
+import org.springframework.ai.stabilityai.api.StabilityAiImageOptions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ImageGenerationService {
+
+    @Autowired
+    private OpenAiImageModel openaiImageModel;
+
+    public ImageResponse generateImage(String prompt) {
+        return openaiImageModel.call(
+                new ImagePrompt(
+                        prompt,
+                        StabilityAiImageOptions.builder()
+                                .withN(4)   // Number of images to generate
+                                .withHeight(1024)
+                                .withWidth(1024)
+                                .build()    // Don't specify a model; it will use the default
+                )
+        );
+    }
+}
