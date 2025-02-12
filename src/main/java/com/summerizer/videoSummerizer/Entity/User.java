@@ -1,14 +1,9 @@
 package com.summerizer.videoSummerizer.Entity;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import reactor.util.annotation.NonNull;
 
 import java.util.UUID;
 
@@ -16,25 +11,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "user")
+@Table(name = "users") // Use 'users' instead of 'user'
 public class User {
 
     @Id
-    String userId;
+    @Column(name = "user_id", updatable = false, nullable = false)
+    private String userId;
 
-
-    String username;
-
-    String email;
+    private String username;
+    private String email;
     private String password;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @PrePersist
     public void generateId() {
@@ -42,6 +28,7 @@ public class User {
             this.userId = UUID.randomUUID().toString();
         }
     }
+
     public String getUserId() {
         return userId;
     }
@@ -65,4 +52,13 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+// Getters and Setters
 }

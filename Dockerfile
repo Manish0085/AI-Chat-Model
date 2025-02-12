@@ -29,4 +29,4 @@ ENV MAIL_USERNAME=${MAIL_USERNAME}
 ENV MAIL_PASSWORD=${MAIL_PASSWORD}
 
 # JVM Optimization for Production
-ENTRYPOINT ["java", "-jar", "-XX:+UseG1GC", "-XX:MaxRAMPercentage=75.0", "video-summerizer.jar"]
+ENTRYPOINT ["java", "-jar", "video-summerizer.jar"]
