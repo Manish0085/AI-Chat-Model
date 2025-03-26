@@ -26,6 +26,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .requiresChannel(channel ->
+                        channel.anyRequest().requiresSecure())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/chat/**").permitAll()
@@ -51,6 +53,7 @@ public class SecurityConfig {
                 .oauth2Login(auth -> auth
                         .loginPage("/login")
                         .successHandler(handler));
+
 
         return http.build();
     }
