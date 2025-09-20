@@ -31,6 +31,7 @@ import java.util.*;
 public class ImageController {
 
     @Autowired
+    @Qualifier("stabilityAiImageModel")
     private ImageModel openaiImageModel;
 
     @Autowired
